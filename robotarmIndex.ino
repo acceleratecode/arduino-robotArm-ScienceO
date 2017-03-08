@@ -10,6 +10,7 @@
 * For type of potentiometer, the Bs are better than the As due to free space on the As
 */
 
+// imported library for the servo/motors
 #include <Servo.h>
 
 // servo can be used for whichever motor, the servos below were used for mine
