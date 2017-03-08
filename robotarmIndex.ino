@@ -12,12 +12,14 @@
 
 #include <Servo.h>
 
+// servo can be used for whichever motor, the servos below were used for mine
 Servo servo1; // base rotator servo
-Servo servo2; // top tower servo/motor
-Servo servo3; // elbow servo
-Servo servo4; // wrist servo
-Servo servo5; // wrist rotator servo
-Servo servo6; // penny servo
+Servo servo2; // left shoulder veritcal servo
+Servo servo3; // right shoulder vertical servo
+Servo servo4; // elbow vertical servo
+Servo servo5; // wrist vertical servo
+Servo servo6; // wrist rotator servo
+Servo servo7; // hand servo
 
 int potPin1 = 0;
 int potPin2 = 1;
@@ -25,6 +27,7 @@ int potPin3 = 2;    // select the input pin for the potentiometer
 int potPin4 = 3;
 int potPin5 = 4;
 int potPin6 = 5;
+int potPin7 = 6;
 
 int valA, oldValA = 0;       // variable to store the value coming from the sensor
 int valB, oldValB = 0;
@@ -32,18 +35,29 @@ int valC, oldValC = 0;
 int valD, oldValD = 0;
 int valE, oldValE = 0;
 int valF, oldValF = 0;
+int valG, oldValG = 0;
 
 // initial function to initialize values
 void setup() {
-  servo1.attach(2);           // setup the pin the servo data signal is on
+  // setup the pin the servo data signal is on to output to servo/motor
+  // value corresponds to the pin on the other side of the Analog to output
+  servo1.attach(2);           
   servo2.attach(3);
   servo3.attach(4);
   servo4.attach(5);
   servo5.attach(6);
-  servo6.attach(7);     
+  servo6.attach(7);   
+  servo7.attach(8);
 }
 // loops forever until reset button is pressed or unplugged from power source
 void loop() {
+  /* HOW THE BELOW CODE WORKS!!
+  * val = analogRead(#) <-- value is read from potentiometer based off A# and stored into the val variable
+  * val = map(val, 0, 1023, 0, 180) <-- new value is stored based off originally written value from potentiometer
+    that returns a value of 0-1023, and is converted to a 0-180 degree scale, can be converted to a 360 degree value.
+  * servo#.write(va) <-- value is written to pin based off number and output to the servo/motor on the previously mentioned scale.
+  */
+  
   valA = analogRead(potPin1);
   valA = map(valA, 0, 1023, 0, 180);
   servo1.write(valA);
@@ -63,6 +77,14 @@ void loop() {
   valE = analogRead(potPin5);
   valE = map(valE, 0, 1023, 0, 180);
   servo5.write(valE);
+  
+  valF = analogRead(potPin6);
+  valF = map(valF, 0, 1023, 0, 180);
+  servo6.write(valF);
+  
+  valG = analogRead(potPin7);
+  valG = map(valG, 0, 1023, 0, 180);
+  servo7.write(valG);
   
   delay(15);                        // delay of 15 ms for the servo to catch up
 
