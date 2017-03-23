@@ -1,7 +1,7 @@
 /** Arduino code used for Robot Arm competition in Science Olympiad
 * __________________________Notes _________________________________
 * Use 5V for potentiometers
-* Use 9V ideally for Potentiometers
+* Use 9V ideally for Servos/Motors
 * For the breadboard, 1 side for 5V and the other for 9V, both grounds go into the 9V side
 * When looking at potentiometer from the front (turn wheel facing towards you)
   left plug is positive(+), middle plug is value(a), and right plug is negative/ground(-)
